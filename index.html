@@ -37,8 +37,23 @@
         radial-gradient(circle at 80% 10%, rgba(167, 139, 250, 0.18), transparent 28%),
         radial-gradient(circle at 70% 70%, rgba(52, 211, 153, 0.10), transparent 24%),
         linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      background-size: 120% 120%;
+      animation: bgFloat 18s ease-in-out infinite;
       min-height: 100vh;
       line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    @keyframes bgFloat {
+      0% {
+        background-position: 0% 0%, 100% 0%, 80% 80%, 0% 0%;
+      }
+      50% {
+        background-position: 8% 6%, 92% 4%, 75% 88%, 50% 50%;
+      }
+      100% {
+        background-position: 0% 0%, 100% 0%, 80% 80%, 0% 0%;
+      }
     }
 
     a {
@@ -89,10 +104,26 @@
       color: var(--muted);
       transition: 0.25s ease;
       font-size: 0.98rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.25s ease;
     }
 
     .nav-links a:hover {
       color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     .hero {
@@ -106,6 +137,11 @@
       align-items: center;
     }
 
+    .hero-text {
+      transition: transform 0.25s ease;
+      will-change: transform;
+    }
+
     .hero-text h1 {
       font-size: clamp(2.5rem, 6vw, 4.6rem);
       line-height: 1.04;
@@ -116,6 +152,16 @@
       background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: glowPulse 3.5s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 6px rgba(125, 211, 252, 0.18));
+      }
+      50% {
+        filter: drop-shadow(0 0 14px rgba(167, 139, 250, 0.30));
+      }
     }
 
     .hero-subtitle {
@@ -140,6 +186,12 @@
       color: var(--text);
       font-size: 0.94rem;
       box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .badge:hover {
+      transform: translateY(-2px);
+      border-color: rgba(125, 211, 252, 0.35);
     }
 
     .hero-buttons {
@@ -165,6 +217,7 @@
     .btn-primary:hover {
       transform: translateY(-2px);
       filter: brightness(1.05);
+      box-shadow: 0 12px 30px rgba(125, 211, 252, 0.28);
     }
 
     .btn-secondary {
@@ -176,6 +229,7 @@
     .btn-secondary:hover {
       transform: translateY(-2px);
       background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(125, 211, 252, 0.35);
     }
 
     .hero-card {
@@ -187,6 +241,8 @@
       backdrop-filter: blur(18px);
       position: relative;
       overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      will-change: transform;
     }
 
     .hero-card::before {
@@ -198,6 +254,18 @@
       right: -40px;
       background: radial-gradient(circle, rgba(125, 211, 252, 0.24), transparent 70%);
       pointer-events: none;
+      animation: pulseOrb 6s ease-in-out infinite;
+    }
+
+    @keyframes pulseOrb {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.75;
+      }
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
     }
 
     .profile-circle {
@@ -211,6 +279,7 @@
       margin-bottom: 20px;
       background: linear-gradient(135deg, rgba(125, 211, 252, 0.22), rgba(167, 139, 250, 0.26));
       border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 30px rgba(125, 211, 252, 0.12);
     }
 
     .mini-title {
@@ -241,6 +310,12 @@
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.08);
       color: var(--muted);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .info-list li:hover {
+      transform: translateX(4px);
+      border-color: rgba(125, 211, 252, 0.22);
     }
 
     section {
@@ -277,12 +352,13 @@
       padding: 24px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
-      transition: 0.25s ease;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
       border-color: rgba(125, 211, 252, 0.28);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
     }
 
     .card h3 {
@@ -319,14 +395,35 @@
       border-left: 3px solid var(--accent2);
       background: rgba(255,255,255,0.05);
       border-radius: 0 18px 18px 0;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(6px);
+      border-left-color: var(--accent);
+      background: rgba(255,255,255,0.08);
     }
 
     .timeline-item h4 {
       margin-bottom: 6px;
+      font-size: 1.08rem;
+      color: var(--text);
     }
 
     .timeline-item p {
       color: var(--muted);
+    }
+
+    .pub-year {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(125, 211, 252, 0.12);
+      border: 1px solid rgba(125, 211, 252, 0.18);
     }
 
     .contact-box {
@@ -348,6 +445,17 @@
       color: var(--muted);
       text-align: center;
       font-size: 0.95rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @media (max-width: 960px) {
@@ -395,7 +503,7 @@
 
   <nav class="navbar">
     <div class="container nav-inner">
-      <div class="logo">🌌 <span>Your Name</span></div>
+      <div class="logo">🌌 <span>Yuhong Fu</span></div>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#research">Research</a>
@@ -406,7 +514,7 @@
     </div>
   </nav>
 
-  <header class="hero container">
+  <header class="hero container reveal">
     <div class="hero-grid">
       <div class="hero-text">
         <h1>
@@ -434,7 +542,7 @@
       <div class="hero-card">
         <div class="profile-circle">YF</div>
         <div class="mini-title">Current Focus</div>
-        <h3>Hybrid modelling for interoperability</h3>
+        <h3>Combined modelling for interoperability</h3>
         <p>
           Integrating multi-level and multi-view modelling to support vertical and horizontal
           interoperability across heterogeneous systems.
@@ -449,7 +557,7 @@
     </div>
   </header>
 
-  <section id="about">
+  <section id="about" class="reveal">
     <div class="container">
       <h2 class="section-title">👩‍💻 About Me</h2>
       <p class="section-desc">
@@ -476,14 +584,14 @@
         <div class="card">
           <h3>⚙️ Methods</h3>
           <p>
-            Conceptual modelling
+            Conceptual modelling, consistency analysis, collaborative modelling, and logic-based reasoning.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="research">
+  <section id="research" class="reveal">
     <div class="container">
       <h2 class="section-title">🔍 Research Interests</h2>
       <p class="section-desc">
@@ -506,6 +614,7 @@
           <h3>Technical Skills</h3>
           <ul>
             <li><strong>Programming:</strong> Python, Smalltalk</li>
+            <li><strong>Knowledge Representation:</strong> F-Logic</li>
             <li><strong>Tools:</strong> DoME, VisualWorks, ErgoAI</li>
             <li><strong>Research Methods:</strong> Conceptual Modelling</li>
           </ul>
@@ -514,7 +623,7 @@
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" class="reveal">
     <div class="container">
       <h2 class="section-title">🚀 Selected Projects</h2>
       <p class="section-desc">
@@ -525,7 +634,7 @@
         <div class="card">
           <h3>Combined Modelling for Interoperability</h3>
           <p>
-            Developing integrated approaches that combine multi-level and multi-view modelling
+            Developing an integrated approach that combines multi-level and multi-view modelling
             to improve interoperability across heterogeneous systems.
           </p>
           <span class="project-tag">MLM + MVM</span>
@@ -552,31 +661,54 @@
     </div>
   </section>
 
-  <section id="publications">
+  <section id="publications" class="reveal">
     <div class="container">
       <h2 class="section-title">📝 Publications</h2>
       <p class="section-desc">
-        Replace the placeholder items below with your actual papers, preprints, conference articles, or technical reports.
+        Selected publications on multi-level modelling, multi-view modelling, interoperability, and collaborative modelling.
       </p>
 
       <div class="timeline">
         <div class="timeline-item">
-          <h4>Paper Title One</h4>
-          <p>Author Name(s), <em>Venue</em>, Year</p>
+          <span class="pub-year">2025</span>
+          <h4>Conflict Management for Multi-Level Models in Collaborative Modelling Environments</h4>
+          <p>
+            Fu, Y., Grossmann, G., Kaur, K., Selway, M., &amp; Stumptner, M. (2025).
+            In <em>MODELS 2025 Companion (Proc. of CoPaMo Workshop)</em>, pages 502-511. ACM.
+          </p>
         </div>
+
         <div class="timeline-item">
-          <h4>Paper Title Two</h4>
-          <p>Author Name(s), <em>Venue</em>, Year</p>
+          <span class="pub-year">2024</span>
+          <h4>Modelling a Warehouse with SLICER: A Contribution to the MULTI Warehouse Challenge</h4>
+          <p>
+            Fu, Y., Selway, M., Grossmann, G., Kaur, K., &amp; Stumptner, M. (2024).
+            In <em>MODELS 2024 Companion (Proc. of MULTI Workshop)</em>, pages 828-837. ACM.
+          </p>
         </div>
+
         <div class="timeline-item">
-          <h4>Paper Title Three</h4>
-          <p>Author Name(s), <em>Venue</em>, Year</p>
+          <span class="pub-year">2023</span>
+          <h4>Towards the Integration of Multi-Level and Multi-View Modelling for Interoperability</h4>
+          <p>
+            Fu, Y., Grossmann, G., Kaur, K., Selway, M., &amp; Stumptner, M. (2023).
+            In <em>MODELS 2023 Companion (Proc. of MULTI Workshop)</em>, pages 679-688. IEEE.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="pub-year">2022</span>
+          <h4>Multi-Level Risk Modelling for Interoperability of Risk Information</h4>
+          <p>
+            Fu, Y., Grossmann, G., Kaur, K., Selway, M., &amp; Stumptner, M. (2022).
+            In <em>Proc. of the IN4PL 2022</em>, pages 242-249. SCITEPRESS.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="reveal">
     <div class="container">
       <div class="card contact-box">
         <h2 class="section-title">📫 Contact</h2>
@@ -586,9 +718,9 @@
 
         <div class="contact-links">
           <a class="btn btn-primary" href="mailto:yuhong.fu@adelaide.edu.au">Email Me</a>
-          <a class="btn btn-secondary" href="https://github.com/Aries-Fu" target="_blank">GitHub</a>
-          <a class="btn btn-secondary" href="https://scholar.google.com/citations?hl=en&user=wFIj5b0AAAAJ" target="_blank">Google Scholar</a>
-          <a class="btn btn-secondary" href="www.linkedin.com/in/yuhong-fu-8770a2180" target="_blank">LinkedIn</a>
+          <a class="btn btn-secondary" href="https://github.com/Aries-Fu" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn btn-secondary" href="https://scholar.google.com/citations?hl=en&user=wFIj5b0AAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/yuhong-fu-8770a2180" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
     </div>
@@ -599,6 +731,36 @@
       © 2026 Yuhong Fu · Academic Homepage · Built with GitHub Pages
     </div>
   </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    const heroCard = document.querySelector('.hero-card');
+    const heroText = document.querySelector('.hero-text');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+      if (heroCard && window.innerWidth > 960) {
+        heroCard.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px)`;
+      }
+
+      if (heroText && window.innerWidth > 960) {
+        heroText.style.transform = `translate(${x * -0.12}px, ${y * -0.12}px)`;
+      }
+    });
+  </script>
 
 </body>
 </html>
