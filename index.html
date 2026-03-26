@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuhong Fu | Academic Homepage</title>
+  <meta name="description" content="PhD Candidate in System Modelling" />
+  <style>
+    :root {
+      --bg1: #07111f;
+      --bg2: #0f1f3d;
+      --bg3: #09101d;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.14);
+      --text: #eaf2ff;
+      --muted: #a9bbd6;
+      --accent: #7dd3fc;
+      --accent2: #a78bfa;
+      --accent3: #34d399;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --max-width: 1150px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(125, 211, 252, 0.18), transparent 26%),
+        radial-gradient(circle at 80% 10%, rgba(167, 139, 250, 0.18), transparent 28%),
+        radial-gradient(circle at 70% 70%, rgba(52, 211, 153, 0.10), transparent 24%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      min-height: 100vh;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 15, 30, 0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-size: 1.1rem;
+    }
+
+    .logo span {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: 0.25s ease;
+      font-size: 0.98rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 90px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 6vw, 4.6rem);
+      line-height: 1.04;
+      margin-bottom: 18px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.12rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      font-size: 0.94rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #06101d;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.14);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      top: -50px;
+      right: -40px;
+      background: radial-gradient(circle, rgba(125, 211, 252, 0.24), transparent 70%);
+      pointer-events: none;
+    }
+
+    .profile-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, rgba(125, 211, 252, 0.22), rgba(167, 139, 250, 0.26));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .mini-title {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .info-list li {
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+
+    section {
+      padding: 26px 0 18px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      margin-bottom: 24px;
+      max-width: 760px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(125, 211, 252, 0.28);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 1.18rem;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+    }
+
+    .card ul {
+      padding-left: 18px;
+    }
+
+    .project-tag {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      background: rgba(125, 211, 252, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(125, 211, 252, 0.18);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      padding: 20px 22px;
+      border-left: 3px solid var(--accent2);
+      background: rgba(255,255,255,0.05);
+      border-radius: 0 18px 18px 0;
+    }
+
+    .timeline-item h4 {
+      margin-bottom: 6px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    .contact-box {
+      text-align: center;
+      padding: 34px 24px;
+      margin-top: 18px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    footer {
+      padding: 34px 0 46px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-text h1 {
+        font-size: 2.35rem;
+      }
+
+      .section-title {
+        font-size: 1.65rem;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <div class="logo">🌌 <span>Your Name</span></div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1>
+          Building <span class="gradient-text">interoperable systems</span><br />
+          through advanced modelling
+        </h1>
+        <p class="hero-subtitle">
+          I am a PhD Candidate in System Modelling, focusing on heterogeneous system interoperability,
+          multi-level modelling, multi-view modelling, consistency management, and digital twins.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">🎓 PhD Candidate</span>
+          <span class="badge">🧠 System Modelling</span>
+          <span class="badge">🔗 Interoperability</span>
+          <span class="badge">🛰️ Digital Twins</span>
+        </div>
+
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#research">Explore Research</a>
+          <a class="btn btn-secondary" href="#contact">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="profile-circle">YF</div>
+        <div class="mini-title">Current Focus</div>
+        <h3>Hybrid modelling for interoperability</h3>
+        <p>
+          Integrating multi-level and multi-view modelling to support vertical and horizontal
+          interoperability across heterogeneous systems.
+        </p>
+        <ul class="info-list">
+          <li>📍 Adelaide, Australia</li>
+          <li>📚 PhD Candidate in System Modelling</li>
+          <li>🛠️ Python · Smalltalk · F-Logic</li>
+          <li>🔬 Researching consistency and projection-based views</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">👩‍💻 About Me</h2>
+      <p class="section-desc">
+        My research investigates how combined modelling methods can improve interoperability across
+        heterogeneous systems. I am particularly interested in combining multi-level modelling and
+        multi-view modelling to create flexible yet consistent representations of complex systems.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>🎯 Research Vision</h3>
+          <p>
+            To design modelling approaches that improve both vertical and horizontal interoperability
+            while maintaining consistency across shared model views.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🧩 Core Themes</h3>
+          <p>
+            Multi-level modelling, multi-view modelling, consistency management, digital twins,
+            and model-driven engineering.
+          </p>
+        </div>
+        <div class="card">
+          <h3>⚙️ Methods</h3>
+          <p>
+            Conceptual modelling
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="container">
+      <h2 class="section-title">🔍 Research Interests</h2>
+      <p class="section-desc">
+        My work sits at the intersection of system modelling, interoperability, and consistency-aware modelling support.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Research Areas</h3>
+          <ul>
+            <li>Heterogeneous System Interoperability</li>
+            <li>Multi-Level Modelling (MLM)</li>
+            <li>Multi-View Modelling (MVM)</li>
+            <li>Consistency Management</li>
+            <li>Digital Twins</li>
+            <li>Model-Driven Engineering (MDE)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Technical Skills</h3>
+          <ul>
+            <li><strong>Programming:</strong> Python, Smalltalk</li>
+            <li><strong>Tools:</strong> DoME, VisualWorks, ErgoAI</li>
+            <li><strong>Research Methods:</strong> Conceptual Modelling</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">🚀 Selected Projects</h2>
+      <p class="section-desc">
+        A few research directions and project themes that represent my current work.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Combined Modelling for Interoperability</h3>
+          <p>
+            Developing integrated approaches that combine multi-level and multi-view modelling
+            to improve interoperability across heterogeneous systems.
+          </p>
+          <span class="project-tag">MLM + MVM</span>
+        </div>
+
+        <div class="card">
+          <h3>Consistency Management Across Views</h3>
+          <p>
+            Investigating how consistency can be preserved when multiple views overlap on a shared
+            underlying model.
+          </p>
+          <span class="project-tag">Consistency</span>
+        </div>
+
+        <div class="card">
+          <h3>Digital Twin Modelling</h3>
+          <p>
+            Exploring modelling support for building interoperable and consistent digital twin systems
+            in complex environments.
+          </p>
+          <span class="project-tag">Digital Twins</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="container">
+      <h2 class="section-title">📝 Publications</h2>
+      <p class="section-desc">
+        Replace the placeholder items below with your actual papers, preprints, conference articles, or technical reports.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>Paper Title One</h4>
+          <p>Author Name(s), <em>Venue</em>, Year</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Paper Title Two</h4>
+          <p>Author Name(s), <em>Venue</em>, Year</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Paper Title Three</h4>
+          <p>Author Name(s), <em>Venue</em>, Year</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="card contact-box">
+        <h2 class="section-title">📫 Contact</h2>
+        <p class="section-desc" style="margin: 0 auto;">
+          Feel free to reach out for academic collaboration, modelling discussions, or research-related communication.
+        </p>
+
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:yuhong.fu@adelaide.edu.au">Email Me</a>
+          <a class="btn btn-secondary" href="https://github.com/Aries-Fu" target="_blank">GitHub</a>
+          <a class="btn btn-secondary" href="https://scholar.google.com/citations?hl=en&user=wFIj5b0AAAAJ" target="_blank">Google Scholar</a>
+          <a class="btn btn-secondary" href="www.linkedin.com/in/yuhong-fu-8770a2180" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 Yuhong Fu · Academic Homepage · Built with GitHub Pages
+    </div>
+  </footer>
+
+</body>
+</html>
